@@ -22,6 +22,8 @@ namespace Checkout.Engine
             }
 
             return total;
+
+            // Next weeks focus - more on pricing rule strategy
         }
     }
 }
