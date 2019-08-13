@@ -44,12 +44,17 @@ namespace Checkout.Tests
             Assert.Equal(expectedSumOfItems, expectedTotal);
         }
 
-        [Fact]
-        public void GivenMoreThanOneOfSameType_WhenCalculatingTotal_ReturnsSumOfPrices()
+        [Theory]
+        [InlineData("AA", 100)]
+        [InlineData("AAA", 130)]
+        [InlineData("AAAA", 180)]
+        [InlineData("AAAAA", 230)]
+        [InlineData("AAAAAA", 260)]
+        public void GivenMoreThanOneOfSameType_WhenCalculatingTotal_ReturnsSumOfPrices(string items, int expectedSumOfItems)
         {
-            var expectedTotal = _checkout.TotalPrice( "AA" );
+            var expectedTotal = _checkout.TotalPrice( items );
 
-            Assert.Equal( 100 , expectedTotal );
+            Assert.Equal( expectedSumOfItems , expectedTotal );
         }
     }
 }
