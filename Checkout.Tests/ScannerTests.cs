@@ -29,8 +29,7 @@ namespace Checkout.Tests
         [InlineData("D", 15)]
         public void GivenAnCartContainingSingleItems_WhenCalculatingTotal_ReturnExpectedPrice (string items, int expected)
         {
-            var cart = items;
-            var expectedTotal = _checkout.TotalPrice( cart );
+            var expectedTotal = _checkout.TotalPrice( items );
 
             Assert.Equal( expected , expectedTotal );
         }
@@ -40,10 +39,17 @@ namespace Checkout.Tests
         [InlineData("CBDA", 115)]
         public void GivenMoreThanOneItem_WhenCalculatingTotal_ReturnSumOfItemPrices(string items, int expectedSumOfItems)
         {
-            var cart = items;
-            var expectedTotal = _checkout.TotalPrice(cart);
+            var expectedTotal = _checkout.TotalPrice(items);
 
             Assert.Equal(expectedSumOfItems, expectedTotal);
+        }
+
+        [Fact]
+        public void GivenMoreThanOneOfSameType_WhenCalculatingTotal_ReturnsSumOfPrices()
+        {
+            var expectedTotal = _checkout.TotalPrice( "AA" );
+
+            Assert.Equal( 100 , expectedTotal );
         }
     }
 }
