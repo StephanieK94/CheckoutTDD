@@ -35,13 +35,15 @@ namespace Checkout.Tests
             Assert.Equal( expected , expectedTotal );
         }
 
-        [Fact]
-        public void GivenMoreThanOneItems_WhenCalculatingTotal_ReturnSumOfItemPrices()
+        [Theory]
+        [InlineData("AB", 80)]
+        [InlineData("CBDA", 115)]
+        public void GivenMoreThanOneItem_WhenCalculatingTotal_ReturnSumOfItemPrices(string items, int expectedSumOfItems)
         {
-            var cart = "AB";
+            var cart = items;
             var expectedTotal = _checkout.TotalPrice(cart);
 
-            Assert.Equal(80, expectedTotal);
+            Assert.Equal(expectedSumOfItems, expectedTotal);
         }
     }
 }
