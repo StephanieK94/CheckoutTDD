@@ -6,6 +6,7 @@ namespace Checkout.Tests
 {
     public class ScannerTests
     {
+        
         [Fact]
         public void GivenAnEmptyCart_WhenCalculatingTotal_Return0 ()
         {
@@ -16,14 +17,18 @@ namespace Checkout.Tests
             Assert.Equal(0, expectedTotal);
         }
 
-        [Fact]
-        public void GivenAnCartContainingItemA_WhenCalculatingTotal_Return50 ()
+        [Theory]
+        [InlineData("A", 50)]
+        [InlineData("B", 30)]
+        [InlineData("C", 20)]
+        [InlineData("D", 15)]
+        public void GivenAnCartContainingItemA_WhenCalculatingTotal_Return50 (string items, int expected)
         {
-            var cart = "A";
+            var cart = items;
             var checkout = new Scanner();
             var expectedTotal = checkout.TotalPrice( cart );
 
-            Assert.Equal( 50 , expectedTotal );
+            Assert.Equal( expected , expectedTotal );
         }
     }
 }
