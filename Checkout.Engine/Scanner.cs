@@ -4,11 +4,18 @@ namespace Checkout.Engine
     {
         public int TotalPrice(string cart)
         {
-            if (cart.Contains('A')) return 50;
-            if (cart.Contains('B')) return 30;
-            if (cart.Contains('C')) return 20;
-            if (cart.Contains('D')) return 15;
-            return 0;
+            var cartItems = cart.ToCharArray();
+            var total = 0;
+
+            foreach (var item in cartItems)
+            {
+                if ( item.Equals('A')) total += 50;
+                if ( item.Equals( 'B' ) ) total += 30;
+                if ( item.Equals( 'C' ) ) total += 20;
+                if ( item.Equals( 'D' ) ) total += 15;
+            }
+
+            return total;
         }
     }
 }

@@ -27,12 +27,21 @@ namespace Checkout.Tests
         [InlineData("B", 30)]
         [InlineData("C", 20)]
         [InlineData("D", 15)]
-        public void GivenAnCartContainingItems_WhenCalculatingTotal_ReturnExpectedPrice (string items, int expected)
+        public void GivenAnCartContainingSingleItems_WhenCalculatingTotal_ReturnExpectedPrice (string items, int expected)
         {
             var cart = items;
             var expectedTotal = _checkout.TotalPrice( cart );
 
             Assert.Equal( expected , expectedTotal );
+        }
+
+        [Fact]
+        public void GivenMoreThanOneItems_WhenCalculatingTotal_ReturnSumOfItemPrices()
+        {
+            var cart = "AB";
+            var expectedTotal = _checkout.TotalPrice(cart);
+
+            Assert.Equal(80, expectedTotal);
         }
     }
 }
